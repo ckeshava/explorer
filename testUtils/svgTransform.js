@@ -4,10 +4,11 @@ const path = require('path')
 // http://facebook.github.io/jest/docs/en/webpack.html
 
 module.exports = {
-  process(_src, filename) {
-    const assetFilename = JSON.stringify(path.basename(filename))
+  process(sourceText, sourcePath, options) {
+    const assetFilename = JSON.stringify(path.basename(sourcePath))
 
-    return `const React = require('react');
+    return {
+      code: `const React = require('react');
       module.exports = React.forwardRef((props, ref) => {
         return {
           $$typeof: Symbol.for('react.element'),
@@ -18,6 +19,7 @@ module.exports = {
             children: ${assetFilename}
           })
         };
-      });`
+      });`,
+    }
   },
 }

@@ -221,6 +221,7 @@ describe('Amendments Page container', () => {
     await flushPromises()
     await flushPromises()
     await flushPromises()
+    // why do we need three invocations of flushPromises?
     wrapper.update()
 
     expect(wrapper.find('.no-match').length).toBe(1)

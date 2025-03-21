@@ -8,6 +8,9 @@ import type i18n from '../../i18n/testConfig'
 import { testQueryClient } from './QueryClient'
 import { AnalyticsSetPath } from '../shared/analytics'
 
+// Note: Refer to this discussion regarding the necessity of the below import: https://github.com/prisma/prisma/issues/8558
+import { setImmediate } from 'timers'
+
 export function flushPromises() {
   return new Promise((resolve) => setImmediate(resolve))
 }
