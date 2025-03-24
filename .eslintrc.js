@@ -5,6 +5,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'plugin:import/typescript',
     'prettier',
+    'plugin:react-hooks/recommended',
   ],
   plugins: ['jsx-a11y', 'prettier', 'import'],
   env: {

@@ -3,14 +3,14 @@ import { I18nextProvider } from 'react-i18next'
 import { HelmetProvider } from 'react-helmet-async'
 import { MemoryRouter } from 'react-router'
 import moxios from 'moxios'
+// Note: Refer to this discussion regarding the necessity of the below import: https://github.com/prisma/prisma/issues/8558
+import { setImmediate } from 'timers'
 import i18n from '../../../../i18n/testConfig'
 import { DEXPairs } from '../index'
 import mockTopEndpoint from './mockTopEndpoint.json'
 import mockExchangeData from './mockExchangeData.json'
 import SocketContext from '../../../shared/SocketContext'
 import BaseMockWsClient from '../../../test/mockWsClient'
-// Note: Refer to this discussion regarding the necessity of the below import: https://github.com/prisma/prisma/issues/8558
-import { setImmediate } from 'timers'
 
 const address = 'rHEQnRvqWccQALFfpG3YuoxxVyhDZnF4TS'
 const currency = 'USD'

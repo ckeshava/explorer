@@ -33,7 +33,7 @@
     "i18next-http-backend": "^2.2.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react-dom": "^19.0.0",
     "react-error-boundary": "^4.0.13",
     "react-helmet-async": "^2.0.4",
     "react-i18next": "^12.3.1",
@@ -73,7 +73,6 @@
     "babel-jest": "^29.7.0",
     "canvas": "^3.1.0",
     "enzyme": "3.11.0",
-    "enzyme-adapter-react-17-updated": "^1.0.2",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -112,7 +111,8 @@
   },
   "overrides": {
     "jest-environment-jsdom": "^29.7.0",
-    "canvas": "^3.1.0"
+    "canvas": "^3.1.0",
+    "react": "^17.0.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,scss}": [
