@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { compose, applyMiddleware, createStore } from 'redux'
-import thunk from 'redux-thunk'
+import { thunk } from 'redux-thunk'
 import { I18nextProvider } from 'react-i18next'
 import reduxLogger from 'redux-logger'
 import { composeWithDevTools } from '@redux-devtools/extension'
@@ -33,19 +33,19 @@ const renderApp = () => {
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-const middlewarePackages = [thunk]
-let middleware = applyMiddleware(...middlewarePackages)
+// const middlewarePackages = [thunk]
+// let middleware = applyMiddleware(...middlewarePackages)
 if (isDevelopment) {
   localStorage.setItem('debug', 'xrpl-debug:*')
-  middlewarePackages.push(reduxLogger)
-  middleware = applyMiddleware(...middlewarePackages)
-  enhancers = composeWithDevTools(middleware)
-  store = createStore(rootReducer, enhancers)
+  // middlewarePackages.push(reduxLogger.default)
+  // middleware = applyMiddleware(...middlewarePackages)
+  // enhancers = composeWithDevTools(middleware)
+  store = createStore(rootReducer, applyMiddleware(thunk))
   renderApp()
 } else {
   localStorage.removeItem('debug')
-  enhancers = compose(middleware)
-  store = createStore(rootReducer, enhancers)
+  // enhancers = compose(middleware)
+  store = createStore(rootReducer, applyMiddleware(thunk))
   renderApp()
 }
 
