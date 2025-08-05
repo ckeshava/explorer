@@ -511,6 +511,7 @@ class Streams extends Component {
     const rippledSocket = this.context
 
     this.onLedgerWrapper = async (streamResult) => {
+      console.log('onLedgerWrapper: ', new Date().toISOString())
       if (streamResult.type !== 'ledgerClosed') {
         return
       }

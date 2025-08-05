@@ -8,6 +8,7 @@ import { VALIDATOR_ROUTE } from '../App/routes'
 import { LedgerListEntry } from './LedgerListEntry'
 import { useSelectedValidator } from './useSelectedValidator'
 import { usePreviousWithPausing } from '../shared/hooks/usePreviousWithPausing'
+import { useEffect } from 'react'
 
 export const Ledgers = ({
   paused,
@@ -23,6 +24,19 @@ export const Ledgers = ({
   const { selectedValidator } = useSelectedValidator()
   const localLedgers = usePreviousWithPausing(ledgers, paused)
   const isOnline = useIsOnline()
+
+  useEffect(() => {
+    if (ledgers.length > 0 && isOnline) {
+      console.log('--------------------------------')
+      console.log('isOnline', isOnline)
+      console.log('ledgers', ledgers)
+      console.log(
+        'ledgers component mounted at timestamp: ',
+        new Date().toISOString(),
+      )
+      console.log('--------------------------------')
+    }
+  }, [isOnline])
 
   return (
     <div className="ledgers">

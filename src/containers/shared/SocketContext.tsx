@@ -1,6 +1,9 @@
 import React, { useContext, createContext, useEffect, useState } from 'react'
 import { XrplClient } from 'xrpl-client'
 import { useAnalytics } from './analytics'
+import logger from '../../rippled/lib/logger'
+
+const log = logger({ name: 'socket-context' })
 
 const LOCALHOST_URLS = ['localhost', '127.0.0.1', '0.0.0.0']
 
@@ -97,14 +100,27 @@ const useIsOnline = () => {
   const [isOnline, setIsOnline] = useState(false)
 
   useEffect(() => {
-    const setIsReadyTrue = () => setIsOnline(true)
-    const setIsReadyFalse = () => setIsOnline(false)
+    const setIsReadyTrue = () => {
+      setIsOnline(true)
+      log.info(
+        `rippled socket is online at timestamp: ${new Date().toISOString()} ${rippledSocket.getState().server.uri}`,
+      )
+    }
+    const setIsReadyFalse = () => {
+      setIsOnline(false)
+      log.info(
+        `rippled socket is offline at timestamp: ${new Date().toISOString()}`,
+      )
+    }
     rippledSocket.ready().then(() => {
+      // Why is this effect called 3 times? Is the component mounted 3 times?
+      console.log('rippledSocket.ready() side-effect:')
       setIsReadyTrue()
-      rippledSocket.on('online', setIsReadyTrue)
+      rippledSocket.on('online', setIsReadyTrue) // is this call useful? online is not an event triggered by xrpl-client
       rippledSocket.on('offline', setIsReadyFalse)
     })
     return () => {
+      console.log('clean up function:')
       rippledSocket.off('online', setIsReadyTrue)
       rippledSocket.off('offline', setIsReadyFalse)
     }

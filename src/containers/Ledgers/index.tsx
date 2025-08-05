@@ -37,6 +37,15 @@ export const LedgersPage = () => {
     }
   }, [trackScreenLoaded])
 
+  useEffect(() => {
+    if (Object.keys(validators).length > 0) {
+      console.log(
+        'LedgersPage: validators have been fetched at ',
+        new Date().toISOString(),
+      )
+    }
+  }, [validators])
+
   const fetchValidators = () => {
     const url = `${process.env.VITE_DATA_URL}/validators/${network}`
 

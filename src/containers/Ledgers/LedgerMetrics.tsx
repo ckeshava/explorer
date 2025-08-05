@@ -14,6 +14,7 @@ import HoverIcon from '../shared/images/hover.svg'
 import './css/ledgerMetrics.scss'
 import { useIsOnline } from '../shared/SocketContext'
 import { useLanguage } from '../shared/hooks'
+import { useEffect } from 'react'
 
 const DEFAULTS = {
   load_fee: '--',
@@ -167,6 +168,18 @@ export const LedgerMetrics = ({
       )
     })
     .reverse()
+
+  useEffect(() => {
+    if (isOnline && !isNaN(data['quorum'])) {
+      console.log(' LedgerMetrics --------------------------------')
+      console.log('data', data)
+      console.log(
+        'ledgers-metrics component mounted at timestamp: ',
+        new Date().toISOString(),
+      )
+      console.log('--------------------------------')
+    }
+  }, [isOnline, data])
 
   return (
     <div className="metrics-control">

@@ -32,5 +32,6 @@ if (isDevelopment) {
   localStorage.removeItem('debug')
   renderApp()
 }
+console.log(`Starting app at timestamp: ${new Date().toISOString()}`)
 
 unregister()
