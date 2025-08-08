@@ -42,6 +42,9 @@ function getSocket(rippledUrl?: string): ExplorerXrplClient {
     }
   })
 
+  console.log('INFO: Creating a new WebSocket connection', wsUrls)
+  console.log('INFO: WebSocket initiation timestamp', new Date().toISOString())
+
   const socket = new XrplClient(wsUrls, {
     tryAllNodes: true,
   }) as ExplorerXrplClient
